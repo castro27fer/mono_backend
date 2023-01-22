@@ -16,4 +16,6 @@ app.get("/",(req,res) => {
     res.json({"mono":"Bienvenido.."});
 });
 
+app.use("/api",require("./routes/router.js"));
+
 module.exports = app;

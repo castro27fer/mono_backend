@@ -1,0 +1,149 @@
+[
+  {
+    "_id": "43c66ec3-6683-40f5-822b-1dd06dd73caf",
+    "colId": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "containerId": "",
+    "name": "insert",
+    "url": "localhost:3000/api/user",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-01-21T18:25:15.636Z",
+    "modified": "2023-01-22T07:14:18.438Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\":\"fer\",\n  \"lastName\":\"Barquero Real\",\n  \"email\":\"jf3r123@gmail.com\",\n  \"password\":\"123456\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "1d7f1651-ae85-4bc2-8446-74ab5eb10813",
+    "colId": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "containerId": "",
+    "name": "get user",
+    "url": "localhost:3000/api/user/1",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-01-21T18:49:51.232Z",
+    "modified": "2023-01-21T18:50:08.686Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "61fb0408-76d6-4470-89c0-4cafd29da1aa",
+    "colId": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "containerId": "",
+    "name": "authentication",
+    "url": "localhost:3000/api/user/authentication",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-01-21T20:15:42.759Z",
+    "modified": "2023-01-22T08:48:51.249Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\":\"jf3r123@gmail.com\",\n  \"password\":\"987654\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e610fd7f-98b8-4893-8904-3e59c2609373",
+    "colId": "ed95bc04-ede2-40b1-b0a6-b874384ca4c1",
+    "containerId": "",
+    "name": "insert",
+    "url": "localhost:3000/api/profile",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-01-21T22:12:51.606Z",
+    "modified": "2023-01-22T08:01:15.912Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\":\"VCEO\",\n  \"title\":\"VCEO\",\n  \"description\":\"En el responsable del manejo de toda la empresa\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "cb35264d-39a8-4eea-b7fb-8a18c5d015db",
+    "colId": "d0d9edb2-841c-4f72-9d70-dd839824932f",
+    "containerId": "",
+    "name": "create",
+    "url": "localhost:3000/api/permission",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-01-22T05:37:11.260Z",
+    "modified": "2023-01-22T05:43:07.026Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"description\":\"example description\",\n  \"cadena\":\"example of cadena\",\n  \"level\":1,\n  \"type\":\"module\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "cbe98147-3c29-46fe-b6e7-6287d46aaec7",
+    "colId": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "containerId": "",
+    "name": "add profile",
+    "url": "localhost:3000/api/user/jf3r123@gmail.com/profile",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-01-22T07:29:58.417Z",
+    "modified": "2023-01-22T08:01:26.377Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"profileId\":\"VCEO\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "465502f3-ed30-42e2-abc3-ff77fa397d56",
+    "colId": "ed95bc04-ede2-40b1-b0a6-b874384ca4c1",
+    "containerId": "",
+    "name": "add permission",
+    "url": "localhost:3000/api/profile/J02/permission",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-01-22T08:18:47.803Z",
+    "modified": "2023-01-22T08:27:50.220Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"permissionId\":\"1\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d6eaa37b-b621-4c64-ba47-8c1039ad60a6",
+    "colId": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "containerId": "",
+    "name": "reset password",
+    "url": "localhost:3000/api/user/jf3r123@gmail.com/resetPassword",
+    "method": "PUT",
+    "sortNum": 60000,
+    "created": "2023-01-22T08:46:12.755Z",
+    "modified": "2023-01-22T08:48:27.586Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"currentPassword\":\"123456\",\n  \"newPassword\":\"987654\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

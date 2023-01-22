@@ -5,10 +5,11 @@ const sequelize = require("./database.js");
 
 const port = process.env.PORT;
 
-require("./model/user.js");
+//require("./model/user.js");
+
 async function main(){
     //try{}
-    await sequelize.sync({force:true});
+    await sequelize.sync({force:false});
     app.listen(port,()=>{
         console.log("staring server " + port);
     });

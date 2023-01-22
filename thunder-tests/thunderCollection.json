@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "74a52bbe-ddf6-4a53-a487-db2a52ddcdb0",
+    "colName": "user",
+    "created": "2023-01-21T18:25:04.026Z",
+    "sortNum": 10000,
+    "folders": []
+  },
+  {
+    "_id": "ed95bc04-ede2-40b1-b0a6-b874384ca4c1",
+    "colName": "profile",
+    "created": "2023-01-21T22:12:40.709Z",
+    "sortNum": 20000,
+    "folders": []
+  },
+  {
+    "_id": "d0d9edb2-841c-4f72-9d70-dd839824932f",
+    "colName": "permission",
+    "created": "2023-01-22T05:37:03.125Z",
+    "sortNum": 30000,
+    "folders": []
+  }
+]

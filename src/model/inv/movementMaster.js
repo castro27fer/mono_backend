@@ -1,7 +1,7 @@
-const {Model, DataTypes} = requiere("sequelize");
-const sequelize = require("../database.js");
+const {Model, DataTypes} = require("sequelize");
+const sequelize = require("../../database.js");
 
-const product = require("./product.js");
+const movementDetail = require("./movementDetail.js");
 
 class movementMaster extends Model{};
 movementMaster.init({
@@ -98,20 +98,20 @@ movementMaster.init({
     //         }
     //     },
     // },
-    amount:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        validate:{
-            notNull:{
-                args:true,
-                msg:"El campo cantidad no puede estar vacío."
-            },
-            notEmpty:{
-                args:true,
-                msg:"El campo cantidad no puede estar vacío."
-            }
-        },
-    },
+    // amount:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:false,
+    //     validate:{
+    //         notNull:{
+    //             args:true,
+    //             msg:"El campo cantidad no puede estar vacío."
+    //         },
+    //         notEmpty:{
+    //             args:true,
+    //             msg:"El campo cantidad no puede estar vacío."
+    //         }
+    //     },
+    // },
     issuerName:{
         type:DataTypes.STRING,
         allowNull:true
@@ -134,7 +134,8 @@ movementMaster.init({
     schema:"inv"
 });
 
-// movementMaster.hasOne(product,{
-//     foreignKey:"productId"
-// });
+movementMaster.hasMany(movementDetail,{
+    foreignKey:"movementMasterId"
+});
+
 module.exports = movementMaster;

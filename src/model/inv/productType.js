@@ -1,8 +1,10 @@
-const {DataTypes,Model} = require("sequelize");
-const sequelize = require("../database.js");
+const { DataTypes,Model} = require("sequelize");
+const sequelize = require("../../database.js");
 
-class brand extends Model {}
-brand.init({
+class productType extends Model{ }
+
+productType.init({
+
     id:{
         type:DataTypes.STRING,
         primaryKey:true
@@ -31,4 +33,4 @@ brand.init({
     schema:"inv"
 });
 
-module.exports = brand;
+module.exports = productType;

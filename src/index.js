@@ -5,7 +5,7 @@ const sequelize = require("./database.js");
 
 const port = process.env.PORT;
 
-//require("./model/user.js");
+//require("./model/inv/masterExistence.js");
 
 async function main(){
     //try{}

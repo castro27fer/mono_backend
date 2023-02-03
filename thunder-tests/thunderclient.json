@@ -145,5 +145,93 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "2fbe86db-d0f3-4a71-ba7a-6dd5bb5351de",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "create product Type",
+    "url": "localhost:3000/api/inv/productType",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-02-03T03:13:06.568Z",
+    "modified": "2023-02-03T03:22:03.875Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\":\"PAN\",\n  \"description\":\"Pantalones\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "167d9404-ff5d-4ba7-bf5c-2445b0da9470",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "create brand",
+    "url": "localhost:3000/api/inv/brand",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-02-03T03:27:45.012Z",
+    "modified": "2023-02-03T03:31:14.658Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\":\"MAR\",\n  \"description\":\"Marca A\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c890e876-17b3-4650-b2ce-3e01286d77fc",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "create warehouse",
+    "url": "localhost:3000/api/inv/warehouse",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-02-03T03:33:58.980Z",
+    "modified": "2023-02-03T03:35:49.436Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\":\"BOD03\",\n  \"description\":\"Bodega 3\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "830e3b4a-5487-4b7e-9c72-0e2b71886077",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "create product",
+    "url": "localhost:3000/api/inv/product",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-02-03T03:37:51.594Z",
+    "modified": "2023-02-03T03:44:58.569Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\":\"ZN002\",\n  \"productTypeId\":\"ZAP\",\n  \"brandId\":\"NIK\",\n  \"name\":\"Zapatos Deportivo para mujer talla 6 color azul marca nike\",\n  \"model\":\"004TRN\",\n  \"detail\":\"Zapato deportivo marca nike talla 42 para hombre de color gris.\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c43c4fdb-2d93-480d-8db5-4fd18be9d836",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "create input movement",
+    "url": "",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2023-02-03T03:54:14.068Z",
+    "modified": "2023-02-03T03:54:14.068Z",
+    "headers": []
   }
 ]

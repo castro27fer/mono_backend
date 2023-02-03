@@ -1,6 +1,6 @@
 
-const {Model, DataTypes} = requiere("sequelize");
-const sequelize = require("../database.js");
+const {Model, DataTypes} = require("sequelize");
+const sequelize = require("../../database.js");
 
 const productType = require("./productType.js");
 const brand = require("./brand.js");
@@ -41,7 +41,7 @@ product.init({
     },
     name:{
         type:DataTypes.STRING,
-        allowNull:true,
+        allowNull:false,
         validate:{
             notNull:{
                 args:true,

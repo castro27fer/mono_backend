@@ -62,6 +62,7 @@ user.init({
       }
     }
   },
+  
   password:{
     type:DataTypes.STRING,
     allowNull:false,

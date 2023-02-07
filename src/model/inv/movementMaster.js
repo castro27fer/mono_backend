@@ -112,7 +112,7 @@ movementMaster.init({
     //         }
     //     },
     // },
-    issuerName:{
+    employe:{
         type:DataTypes.STRING,
         allowNull:true
     },
@@ -120,6 +120,10 @@ movementMaster.init({
         type:DataTypes.STRING,
         allowNull:true
     },
+    // supplierId:{
+    //     type:DataTypes.STRING,
+    //     allowNull:false
+    // },
     cancellation:{
         type:DataTypes.BOOLEAN,
         defaultValue:false

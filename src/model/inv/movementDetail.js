@@ -43,7 +43,7 @@ movementDetail.init({
             }
         }
     },
-    unitPrice:{
+    price:{
         type:DataTypes.DECIMAL,
         allowNull:false,
     },

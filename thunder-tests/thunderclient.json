@@ -233,5 +233,19 @@
     "created": "2023-02-03T03:54:14.068Z",
     "modified": "2023-02-03T03:54:14.068Z",
     "headers": []
+  },
+  {
+    "_id": "462d4f0f-afe1-4fb5-944b-924ff3f028a7",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "get warehouses",
+    "url": "localhost:3000/api/inv/warehouses",
+    "method": "GET",
+    "sortNum": 60000,
+    "created": "2023-02-07T05:29:44.931Z",
+    "modified": "2023-02-07T05:31:59.518Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

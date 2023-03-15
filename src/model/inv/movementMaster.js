@@ -66,7 +66,7 @@ movementMaster.init({
             }
         }
     },
-    receivingWarehouse:{
+    receivingWarehouseId:{
         type:DataTypes.STRING,
         allowNull:true,
     },

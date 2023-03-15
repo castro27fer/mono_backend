@@ -9,6 +9,8 @@ const WAREHOUSE = require('../model/inv/warehouse.js');
 const PRODUCT = require('../model/inv/product.js');
 const MOVEMENT_DETAIL = require('../model/inv/movementDetail.js');
 const MASTER_EXISTENCE = require("../model/inv/masterExistence.js"); 
+const INVENTORY = require("../model/inv/Inventory.js");
+const warehouse = require('../model/inv/warehouse.js');
 
 const createProductType = async(req,res) => {
 
@@ -39,6 +41,12 @@ const createBrand = async (req, res) => {
     }
 }
 
+const getWarehouse = async (req, res) => {
+    const id = req.params.id;
+    const warehouse = await WAREHOUSE.findByPk(id);
+    res.json(warehouse);
+}
+
 const createProduct = async (req, res) => {
 
     try{
@@ -67,18 +75,46 @@ const createwarehouse = async (req, res) => {
     }
 }
 
+const createwarehouseEdict = async(req,res) =>{
+
+    try{
+
+        const id = req.params.id;
+        const {description,active} = req.body;
+        console.log(id,active);
+        const warehouse = await WAREHOUSE.findByPk(id);
+        console.log(warehouse);
+        await warehouse.update({
+            description: description,
+            active:active
+        });
+
+        await warehouse.save();
+        console.log(warehouse);
+        res.json(warehouse);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
 const createMovement = async(req,res) =>{
     
     try{
 
-        const data = req.body;
+        let data = req.body;
+        console.log(data);
+        data["year"] = 2023;
+        data["month"] = 2;
+        
         const movementMaster = await MOVEMENT_MASTER.create(data);
        
         res.json(movementMaster);
 
     }
     catch(exception){
-        EXCEPTIONS(exception,req,res);
+        res.status(400).json(exception.errors);
+        //EXCEPTIONS(exception,req,res);
     }
 }
 
@@ -144,6 +180,14 @@ const RegisterMasterExistence = async(req,res) =>{
         EXCEPTIONS(exception,req,res);
     }
 }
+const AllWarehouses= async(req, res) =>{
+    try{
+        res.json(await WAREHOUSE.findAll());
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    } 
+}
 
 const warehouses = async(req, res) =>{
     try{
@@ -154,6 +198,33 @@ const warehouses = async(req, res) =>{
     } 
 }
 
+const inventoryOpening = async(req,res) =>{
+
+    try{
+
+        const data = req.body;
+        const inventory = await INVENTORY.create(data);
+        res.json(inventory);
+    
+
+    } catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const Inventories = async(req,res) =>{
+
+    try{
+
+        const inventories = await INVENTORY.findAll({include:[warehouse]});
+        res.json(inventories);
+    
+    } catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
 module.exports = {
     createProductType,
     createBrand,
@@ -161,5 +232,10 @@ module.exports = {
     createProduct,
     createMovement,
     createMovementDetail,
-    warehouses
+    warehouses,
+    createwarehouseEdict,
+    getWarehouse,
+    AllWarehouses,
+    inventoryOpening,
+    Inventories
 };

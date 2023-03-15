@@ -193,12 +193,12 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2023-02-03T03:33:58.980Z",
-    "modified": "2023-02-03T03:35:49.436Z",
+    "modified": "2023-03-13T21:16:48.091Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\":\"BOD03\",\n  \"description\":\"Bodega 3\"\n}",
+      "raw": "{\n  \"id\":\"BOD04\",\n  \"description\":\"Bodega 3\"\n}",
       "form": []
     },
     "tests": []
@@ -227,12 +227,19 @@
     "colId": "7e075510-8948-46c1-be5b-84363f503517",
     "containerId": "",
     "name": "create input movement",
-    "url": "",
-    "method": "GET",
+    "url": "localhost:3000/api/inv/createMovement",
+    "method": "POST",
     "sortNum": 50000,
     "created": "2023-02-03T03:54:14.068Z",
-    "modified": "2023-02-03T03:54:14.068Z",
-    "headers": []
+    "modified": "2023-02-11T03:26:19.933Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"registrationNumber\":\"0000001\",\n  \"warehouseId\":\"BOD03\",\n  \"movementType\":\"E\",\n  \"employe\":\"Fernando Castro\",\n  \"receiverName\":\"Edgard Barquero\"\n  \n}",
+      "form": []
+    },
+    "tests": []
   },
   {
     "_id": "462d4f0f-afe1-4fb5-944b-924ff3f028a7",

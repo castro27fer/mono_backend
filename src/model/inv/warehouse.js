@@ -5,7 +5,18 @@ class warehouse extends Model{};
 warehouse.init({
     id:{
         type:DataTypes.STRING,
-        primaryKey:true
+        primaryKey:true,
+        allowNull:false,
+        validate:{
+            notNull:{
+                args:true,
+                msg:"El campo código no puede estar vacío."
+            },
+            notEmpty:{
+                args:true,
+                msg:"El campo código no puede estar vacío."
+            }
+        }
     },
     description:{
         type:DataTypes.STRING,
@@ -29,5 +40,6 @@ warehouse.init({
     sequelize,
     schema:"inv"
 });
+
 
 module.exports = warehouse;

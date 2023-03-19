@@ -3,43 +3,44 @@ const EXCEPTIONS = require('../exceptions.js');
 const ValidateError = require('../validateError.js');
 
 const MOVEMENT_MASTER = require('../model/inv/movementMaster.js');
-const PRODUCT_TYPE = require('../model/inv/productType.js');
 const BRAND = require('../model/inv/brand.js');
 const WAREHOUSE = require('../model/inv/warehouse.js');
 const PRODUCT = require('../model/inv/product.js');
 const MOVEMENT_DETAIL = require('../model/inv/movementDetail.js');
 const MASTER_EXISTENCE = require("../model/inv/masterExistence.js"); 
 const INVENTORY = require("../model/inv/Inventory.js");
-const warehouse = require('../model/inv/warehouse.js');
+const SUPPLIER = require("../model/inv/supplier.js");
+const TYPE_PRODUCT = require("../model/inv/productType.js");
+const TYPE_OF_INVENTORY = require("../model/inv/typeOfInventory.js");
 
-const createProductType = async(req,res) => {
+// const createProductType = async(req,res) => {
 
-    try{
+//     try{
 
-        const dataProductType = req.body;
-        const productType = await PRODUCT_TYPE.create(dataProductType);
+//         const dataProductType = req.body;
+//         const productType = await PRODUCT_TYPE.create(dataProductType);
        
-        res.json(productType);
+//         res.json(productType);
 
-    }
-    catch(exception){
-        EXCEPTIONS(exception,req,res);
-    }
-}
+//     }
+//     catch(exception){
+//         EXCEPTIONS(exception,req,res);
+//     }
+// }
 
-const createBrand = async (req, res) => {
+// const createBrand = async (req, res) => {
 
-    try{
+//     try{
     
-        const data = req.body;
-        const obj = await BRAND.create(data);
+//         const data = req.body;
+//         const obj = await BRAND.create(data);
     
-        res.json(obj);
-    }
-    catch(exception){
-        EXCEPTIONS(exception,req,res);
-    }
-}
+//         res.json(obj);
+//     }
+//     catch(exception){
+//         EXCEPTIONS(exception,req,res);
+//     }
+// }
 
 const getWarehouse = async (req, res) => {
     const id = req.params.id;
@@ -81,16 +82,16 @@ const createwarehouseEdict = async(req,res) =>{
 
         const id = req.params.id;
         const {description,active} = req.body;
-        console.log(id,active);
+       
         const warehouse = await WAREHOUSE.findByPk(id);
-        console.log(warehouse);
+        
         await warehouse.update({
             description: description,
             active:active
         });
 
         await warehouse.save();
-        console.log(warehouse);
+        
         res.json(warehouse);
     }
     catch(exception){
@@ -98,17 +99,16 @@ const createwarehouseEdict = async(req,res) =>{
     }
 }
 
-const createMovement = async(req,res) =>{
+const movementCreate = async(req,res) =>{
     
     try{
 
         let data = req.body;
         console.log(data);
-        data["year"] = 2023;
-        data["month"] = 2;
-        
+
+
         const movementMaster = await MOVEMENT_MASTER.create(data);
-       
+        await movementMaster.save();
         res.json(movementMaster);
 
     }
@@ -217,7 +217,13 @@ const Inventories = async(req,res) =>{
 
     try{
 
-        const inventories = await INVENTORY.findAll({include:[warehouse]});
+        const inventories = await INVENTORY.findAll({
+            include:[warehouse],
+            order: [
+                ['closingDate', 'DESC'],
+                ['openingDate','DESC']
+            ],
+        });
         res.json(inventories);
     
     } catch(exception){
@@ -225,17 +231,403 @@ const Inventories = async(req,res) =>{
     }
 }
 
+const inventoryClose = async(req,res) =>{
+
+    try{
+
+       const id = req.params.id;
+       const data = req.body;
+
+       const inventory = await INVENTORY.findByPk(id);
+       await inventory.update(data);
+       await inventory.save();
+
+       res.json(inventory);
+    
+    } catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+}
+
+const getAllSuppliers = async(req,res) =>{
+    try{
+
+        const suppliers = await SUPPLIER.findAll();
+        res.json(suppliers);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
+const getSuppliers = async(req,res) =>{
+    try{
+
+        const suppliers = await SUPPLIER.findAll({whare:{active:true}});
+        res.json(suppliers);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
+const supplierCreate = async(req,res) =>{
+
+    try{
+
+        const data = req.body;
+        const supplier = await SUPPLIER.create(data);
+        await supplier.save();
+
+        res.json(supplier);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+};
+
+const supplierEdict = async(req,res) =>{
+
+    try{
+
+        const id = req.params.id;
+        const data = req.body;
+
+        const supplier = await SUPPLIER.findByPk(id);
+        await supplier.update(data);
+        await supplier.save();
+
+        res.json(supplier);
+
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
+const getSupplier = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const supplier = await SUPPLIER.findByPk(id);
+        res.json(supplier);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const getBrands = async (req, res) => {
+    try{
+        const brands = await BRAND.findAll();
+        res.json(brands);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const brandCreate = async (req, res) => {
+
+    try{
+        const data = req.body;
+        const brand = await BRAND.create(data);
+        await brand.save();
+
+        res.json(brand);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+    
+}
+
+const brandUpdate = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const data = req.body;
+    
+        const brand = await BRAND.findByPk(id);
+        await brand.update(data);
+        await brand.save();
+    
+        res.json(brand);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getBrand = async (req, res) => {
+
+    try{
+
+        const id = req.params.id;
+        const brand = await BRAND.findByPk(id);
+        res.json(brand);
+
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getTypeOfProducts = async (req, res) => {
+    try{
+        const typeOfProducts = await TYPE_PRODUCT.findAll();
+        res.json(typeOfProducts);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const typeProductCreate = async (req, res) => {
+
+    try{
+        const data = req.body;
+        const typeProduct = await TYPE_PRODUCT.create(data);
+        await typeProduct.save();
+
+        res.json(typeProduct);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+    
+}
+
+const typeProductUpdate = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const data = req.body;
+    
+        const typeProduct = await TYPE_PRODUCT.findByPk(id);
+        await typeProduct.update(data);
+        await typeProduct.save();
+    
+        res.json(typeProduct);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getTypeProduct = async (req, res) => {
+
+    try{
+
+        const id = req.params.id;
+        const typeProduct = await BRAND.findByPk(id);
+        res.json(typeProduct);
+
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getAllProducts = async (req, res) => {
+    try{
+        const products = await PRODUCT.findAll({include:[TYPE_PRODUCT,BRAND]});
+        console.log();
+        res.json(products);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const getProducts = async (req, res) => {
+    try{
+        const products = await PRODUCT.findAll({where:{active:true},include:[TYPE_PRODUCT,BRAND]});
+        console.log();
+        res.json(products);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const productCreate = async (req, res) => {
+
+    try{
+        const data = req.body;
+        const product = await PRODUCT.create(data);
+        await product.save();
+
+        res.json(product);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+    
+}
+
+const productUpdate = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const data = req.body;
+    
+        const product = await PRODUCT.findByPk(id);
+        await product.update(data);
+        await product.save();
+    
+        res.json(product);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getProduct = async (req, res) => {
+
+    try{
+
+        const id = req.params.id;
+        const product = await PRODUCT.findByPk(id);
+        res.json(product);
+
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getAllTypeOfInventories= async (req, res) => {
+    try{
+        const typeOfInventories = await TYPE_OF_INVENTORY.findAll();
+     
+        res.json(typeOfInventories);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const getTypeOfInventories = async (req, res) => {
+    try{
+        const typeOfInventories = await TYPE_OF_INVENTORY.findAll({where:{active:true}});
+     
+        res.json(typeOfInventories);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
+
+const typeOfInventoryCreate = async (req, res) => {
+
+    try{
+        const data = req.body;
+        const typeOfInventory = await TYPE_OF_INVENTORY.create(data);
+        await typeOfInventory.save();
+
+        res.json(typeOfInventory);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+    
+}
+
+const typeOfInventoryUpdate = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const data = req.body;
+    
+        const typeOfInventory = await TYPE_OF_INVENTORY.findByPk(id);
+        await typeOfInventory.update(data);
+        await typeOfInventory.save();
+    
+        res.json(typeOfInventory);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
+const getTypeOfInventory = async (req, res) => {
+
+    try{
+
+        const id = req.params.id;
+        const typeOfInventory = await TYPE_OF_INVENTORY.findByPk(id);
+        res.json(typeOfInventory);
+
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+
+   
+}
+
 module.exports = {
-    createProductType,
-    createBrand,
+    // createProductType,
     createwarehouse,
     createProduct,
-    createMovement,
+    movementCreate,
     createMovementDetail,
     warehouses,
     createwarehouseEdict,
     getWarehouse,
     AllWarehouses,
     inventoryOpening,
-    Inventories
+    Inventories,
+    inventoryClose,
+    getSuppliers,
+    supplierCreate,
+    supplierEdict,
+    getSupplier,
+    getBrands,
+    brandCreate,
+    brandUpdate,
+    getBrand,
+    getTypeOfProducts,
+    typeProductCreate,
+    typeProductUpdate,
+    getTypeProduct,
+    getProducts,
+    productCreate,
+    productUpdate,
+    getProduct,
+    getTypeOfInventories,
+    typeOfInventoryCreate,
+    typeOfInventoryUpdate,
+    getTypeOfInventory,
+    getAllProducts,
+    getAllSuppliers,
+    getAllTypeOfInventories
 };

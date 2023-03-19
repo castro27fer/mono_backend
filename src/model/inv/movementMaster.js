@@ -52,6 +52,20 @@ movementMaster.init({
             }
         }
     },
+    typeOfInventoryId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        validate:{
+            notNull:{
+                args:true,
+                msg:"El campo mes no puede estar vacío."
+            },
+            notEmpty:{
+                args:true,
+                msg:"El campo mes no puede estar vacío."
+            }
+        }
+    },
     warehouseId:{
         type:DataTypes.STRING,
         allowNull:false,
@@ -84,34 +98,6 @@ movementMaster.init({
             }
         },
     },
-    // productId:{
-    //     type:DataTypes.STRING,
-    //     allowNull:false,
-    //     validate:{
-    //         notNull:{
-    //             args:true,
-    //             msg:"El campo producto no puede estar vacío."
-    //         },
-    //         notEmpty:{
-    //             args:true,
-    //             msg:"El campo producto no puede estar vacío."
-    //         }
-    //     },
-    // },
-    // amount:{
-    //     type:DataTypes.INTEGER,
-    //     allowNull:false,
-    //     validate:{
-    //         notNull:{
-    //             args:true,
-    //             msg:"El campo cantidad no puede estar vacío."
-    //         },
-    //         notEmpty:{
-    //             args:true,
-    //             msg:"El campo cantidad no puede estar vacío."
-    //         }
-    //     },
-    // },
     employe:{
         type:DataTypes.STRING,
         allowNull:true
@@ -120,15 +106,15 @@ movementMaster.init({
         type:DataTypes.STRING,
         allowNull:true
     },
-    // supplierId:{
-    //     type:DataTypes.STRING,
-    //     allowNull:false
-    // },
-    cancellation:{
+    supplierId:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
+    annulled:{
         type:DataTypes.BOOLEAN,
         defaultValue:false
     },
-    cancellationDate:{
+    dateAnnulled:{
         type:DataTypes.DATE,
         allowNull:true
     }

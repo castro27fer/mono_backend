@@ -61,10 +61,10 @@ product.init({
         type:DataTypes.STRING,
         allowNull:true
     },
-    detail:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
+    // detail:{
+    //     type:DataTypes.STRING,
+    //     allowNull:false
+    // },
     active:{
         type:DataTypes.BOOLEAN,
         allowNull:false,
@@ -76,13 +76,22 @@ product.init({
     schema:"inv"
 });
 
-product.hasOne(productType,{
+product.belongsTo(productType,{
     foreignKey: 'productTypeId'
 });
 
-product.hasOne(brand,{
+product.belongsTo(brand,{
     foreignKey: 'brandId'
 });
+
+
+// product.hasOne(brand,{
+//     foreignKey: 'productTypeId'
+// });
+
+// product.hasOne(brand,{
+//     foreignKey: 'brandId'
+// });
 
 
 module.exports = product;

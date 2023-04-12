@@ -105,15 +105,13 @@ const movementCreate = async(req,res) =>{
 
         let data = req.body;
         console.log(data);
-
-
         const movementMaster = await MOVEMENT_MASTER.create(data);
-        await movementMaster.save();
+        console.log(movementMaster);
         res.json(movementMaster);
 
     }
     catch(exception){
-        res.status(400).json(exception.errors);
+        res.status(400).json(exception);
         //EXCEPTIONS(exception,req,res);
     }
 }
@@ -123,7 +121,11 @@ const createMovementDetail = async(req,res) =>{
     try{
 
         let data = req.body;
-        const movement = await MOVEMENT_DETAIL.create(data);
+        
+        data["movementMasterId"] = req.params.id;
+        data["totalAmount"] = data.price * data.quantity;
+    
+        const movement = await MOVEMENT_DETAIL.create(data,{attributes:{include:[PRODUCT]}});
         res.json(movement);
 
     }
@@ -200,17 +202,22 @@ const warehouses = async(req, res) =>{
 
 const inventoryOpening = async(req,res) =>{
 
-    try{
+    // try{
 
         const data = req.body;
+       
         const inventory = await INVENTORY.create(data);
+        await inventory.save();
+        //res.setHeader("Content-type", "application/json");
+
         res.json(inventory);
+
+    // } catch(exception){
+    //     console.log(exception);
+    //     EXCEPTIONS(exception,req,res);
+    // }
     
 
-    } catch(exception){
-        EXCEPTIONS(exception,req,res);
-    }
-    
 }
 
 const Inventories = async(req,res) =>{
@@ -218,12 +225,13 @@ const Inventories = async(req,res) =>{
     try{
 
         const inventories = await INVENTORY.findAll({
-            include:[warehouse],
+            include:[WAREHOUSE],
             order: [
                 ['closingDate', 'DESC'],
                 ['openingDate','DESC']
             ],
         });
+        // console.log(inventories);
         res.json(inventories);
     
     } catch(exception){
@@ -433,7 +441,7 @@ const getTypeProduct = async (req, res) => {
     try{
 
         const id = req.params.id;
-        const typeProduct = await BRAND.findByPk(id);
+        const typeProduct = await TYPE_PRODUCT.findByPk(id);
         res.json(typeProduct);
 
     }

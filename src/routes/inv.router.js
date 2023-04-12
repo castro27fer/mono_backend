@@ -3,18 +3,16 @@ const inv = require('../controller/inv.controller.js');
 const middleware = require("../middleware/inv.middleware.js");
 const router = Router();
 
-// router.post("/productType",inv.createProductType);
-// router.post("/brand",inv.createBrand);
 router.post("/warehouse",inv.createwarehouse);
 router.get("/warehouse/:id",inv.getWarehouse);
 router.post("/warehouse/edict/:id",inv.createwarehouseEdict);
 router.post("/product",inv.createProduct);
-// router.post("/createMovement",inv.createMovement);
 
 router.get("/warehouses",inv.warehouses);
 router.get("/AllWarehouses",inv.AllWarehouses);
 
-router.post("/opening",middleware.valite_opening_inventory,inv.inventoryOpening);
+router.post("/opening",[middleware.valite_opening_inventory],inv.inventoryOpening);
+
 
 router.get("/Inventories",inv.Inventories);
 router.post("/:id/close",inv.inventoryClose);
@@ -47,7 +45,16 @@ router.get("/typeOfInventories/all",inv.getAllTypeOfInventories);
 router.put("/typeOfInventories/:id",inv.typeOfInventoryUpdate);
 router.get("/typeOfInventories/:id",inv.getTypeOfInventory);
 
-router.post("/inputs",inv.movementCreate);
+router.post("/inputs",[middleware.valida_Open_Inventory,middleware.add_data_inventory],
+    [
+        (req,res,next) => {
+            req.body["movementType"] = "E";
+            next();
+        },
+        inv.movementCreate
+    ]);
+
+router.post("/inputs/:id/detail",inv.createMovementDetail);
 // router.get("/inputs",inv.getTypeOfInventories);
 
 // router.get("/inputs/all",inv.getAllTypeOfInventories);

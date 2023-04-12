@@ -29,6 +29,14 @@ movementDetail.init({
             }
         }
     },
+    barcode:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
+    location:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
     quantity:{
         type:DataTypes.INTEGER,
         allowNull:false,

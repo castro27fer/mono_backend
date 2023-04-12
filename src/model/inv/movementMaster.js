@@ -53,7 +53,7 @@ movementMaster.init({
         }
     },
     typeOfInventoryId:{
-        type:DataTypes.INTEGER,
+        type:DataTypes.STRING,
         allowNull:false,
         validate:{
             notNull:{
@@ -109,6 +109,10 @@ movementMaster.init({
     supplierId:{
         type:DataTypes.STRING,
         allowNull:true
+    },
+    date:{
+        type:DataTypes.DATE,
+        allowNull:false
     },
     annulled:{
         type:DataTypes.BOOLEAN,

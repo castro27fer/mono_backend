@@ -5,7 +5,8 @@ const sequelize = require("./database.js");
 
 const port = process.env.PORT;
 
-require("./model/inv/inventory.js");
+require("./model/authorization/Autorizacion.js");
+require("./model/authorization/autorizacionDetalle.js");
 
 async function main(){
     //try{}

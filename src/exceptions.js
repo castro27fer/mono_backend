@@ -3,12 +3,12 @@ const exceptions = (err,req,res) => {
 
     let messages = [];
     res.status(400);
-    console.log(err);
-
-    
+   
     switch(err.name){
+       
         case "SequelizeValidationError":{
             err.errors.forEach((value,index)=>{
+    
                 messages.push(value.message);
             });
             break;

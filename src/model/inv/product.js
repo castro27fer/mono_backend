@@ -4,6 +4,8 @@ const sequelize = require("../../database.js");
 
 const productType = require("./productType.js");
 const brand = require("./brand.js");
+const format = require("../authorization/catFormato.js");
+const productService = require("./productService.js");
 
 class product extends Model{}
 product.init({
@@ -61,6 +63,18 @@ product.init({
         type:DataTypes.STRING,
         allowNull:true
     },
+    applyFormat:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false
+    }, 
+    applyProcess:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false
+    },  
+    productServiceId:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
     // detail:{
     //     type:DataTypes.STRING,
     //     allowNull:false
@@ -83,6 +97,10 @@ product.belongsTo(productType,{
 product.belongsTo(brand,{
     foreignKey: 'brandId'
 });
+
+// product.belongsTo(productService,{foreignKey: 'productServiceId'});
+
+// product.belongsToMany(format, { through: 'relProducto_Format' });
 
 
 // product.hasOne(brand,{

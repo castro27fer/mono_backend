@@ -7,8 +7,8 @@
     catAuthorizationPriority.init({
         AutorizacionPrioridadId:{
             type: DataTypes.INTEGER,
+            autoIncrement:true,
             primaryKey: true,
-            autoIncrement: true
         },
         Descripcion: {
             type: DataTypes.STRING,

@@ -1,6 +1,6 @@
 const {Model, DataTypes} = require("sequelize");
 const sequelize = require("../../database.js");
-const catDependency = require("./catDependencia.js");
+
 class catContact extends Model{};
 
 catContact.init({
@@ -11,11 +11,7 @@ catContact.init({
     },
     DependenciaId: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    ExpEmpleado_ID: {
-        type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     NombreCompleto: {
         type: DataTypes.STRING,
@@ -23,23 +19,23 @@ catContact.init({
     },
     Telefono: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
-    Extencion: {
+    Extension: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     Celular: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     Correo: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     CorreoOpcional: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     Activo: {
         type: DataTypes.BOOLEAN,
@@ -53,6 +49,4 @@ catContact.init({
     schema:"authorization"
 });
 
-
-catContact.hasOne(catDependency, { foreignKey: "DependenciaId" });
 module.exports = catContact;

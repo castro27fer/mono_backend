@@ -9,32 +9,94 @@ const DEPENDENCY = require("../model/authorization/catDependencia.js");
 const DEPENDENCYTYPE = require("../model/authorization/catDependenciaTipo.js");
 const FORMAT = require("../model/authorization/catFormato.js");
 const PRINT = require("../model/authorization/catImpresion.js");
+const PRODUCT = require("../model/inv/product.js");
 const PRINTIMAGEN = require("../model/authorization/catImpresionImagen.js");
+const sequelize = require("../database.js");
+const url = require('url');
+const { QueryTypes } = require('sequelize');
+const EXCEPTIONS = require('../exceptions.js');
 
+const filterAuthorizations = async(req, res) => {
 
+    try{
+        const queryObject = url.parse(req.url, true).query;
+        const parameters = JSON.parse(queryObject.parameters.replaceAll('""','null'));
+        
+        const authorization = await sequelize.query('SELECT * from "authorization"."filter_authorizations_by_date"(:dateType,to_date(:dateStart,\'YYYY-MM-DD\'),to_date(:dateEnd,\'YYYY-MM-DD\'),:priority,:state)',
+        {
+            replacements: parameters,
+            type: QueryTypes.SELECT
+        });
+        console.log(authorization);
+    
+        res.json(authorization);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+   
+} 
 
 const createAuthorization = async(req, res) => {
 
-    const data = req.body;
-    const authorization = await AUTHORIZATION.create(data);
-    res.json(authorization);
+    try{
+        const data = req.body;
+        const authorization = await AUTHORIZATION.create(data);
+        res.json(authorization);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
 }
 
 const updateAuthorization = async(req, res) => {
 
-    const id = req.params.id;
-    const data = req.body;
+    try{
+        const id = req.params.id;
+        let data = req.body;
+        // data["Saldo"] = data.Cantidad;
 
-    const authorization = await AUTHORIZATION.findByPk(id);
-    await authorization.update(data);
-    await authorization.save();
+        const authorization = await AUTHORIZATION.findByPk(id);
+        await authorization.update(data);
+        await authorization.save();
 
-    res.json(authorization);
+        res.json(authorization);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
+const getAuthorization = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const authorization = await AUTHORIZATION.findByPk(id,{include:[{model:AUTHORIZATIONDETAIL}]});
+        res.json(authorization);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+}
+
+const getAuthorizationDetails = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const details = await AUTHORIZATIONDETAIL.findAll({where:{AutorizacionId:id, Activo:true},include:[{model:PRODUCT}]});
+        res.json(details);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
 }
 
 const createAuthorizationDetail = async(req, res) => {
 
-    const data = req.body;
+    let data = req.body;
+    data["Saldo"] = data.Cantidad;
+    data["AutorizacionId"] = req.params.id;
+
     const authorization = await AUTHORIZATIONDETAIL.create(data);
     res.json(authorization);
 }
@@ -50,6 +112,22 @@ const updateAuthorizationDetail = async(req, res) => {
     res.json(detail);
 }
 
+const authorizationDetalRemove = async (req, res) => {
+
+    try{
+
+        const id = req.params.id;
+        const detail = await AUTHORIZATIONDETAIL.findByPk(id);
+        await detail.update({Activo:false});
+        await detail.save();
+
+        res.json(detail);
+    }
+    catch(exception){
+        EXCEPTIONS(exception,req,res);
+    }
+    
+}
 const createAuthorizationState = async(req, res) => {
 
     const data = req.body;
@@ -264,5 +342,9 @@ module.exports ={
     createPrint,
     updatePrint,
     createPrintImagen,
-    updatePrintImagen
+    updatePrintImagen,
+    filterAuthorizations,
+    getAuthorization,
+    getAuthorizationDetails,
+    authorizationDetalRemove
 }

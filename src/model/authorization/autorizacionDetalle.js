@@ -10,7 +10,7 @@
             AutorizacionDetalleId:{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement:true,
             },
             AutorizacionId: {
                 type: DataTypes.INTEGER,
@@ -30,24 +30,24 @@
             },
             Costo: {
                 type: DataTypes.DECIMAL,
-                allowNull: false
+                allowNull: true
             },
-            UsuarioId: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            EntidadId: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            CargoId: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            FechaRegistro: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
+            // UsuarioId: {
+            //     type: DataTypes.STRING,
+            //     allowNull: false
+            // },
+            // EntidadId: {
+            //     type: DataTypes.STRING,
+            //     allowNull: false
+            // },
+            // CargoId: {
+            //     type: DataTypes.STRING,
+            //     allowNull: false
+            // },
+            // FechaRegistro: {
+            //     type: DataTypes.DATE,
+            //     allowNull: false
+            // },
             Descripcion: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -68,7 +68,12 @@
             schema:"authorization"
         });
         
-        authorizationDetail.belongsTo(product,{ foreignkey:"ProductoId"});
-        authorizationDetail.belongsTo(format,{ foreignkey:"FormatoId"})
+
+        authorizationDetail.belongsTo(product,{foreignKey: { name: 'ProductoId'}});
+        //ProductoId
+        // product.hasMany(authorizationDetail,{ foreignkey:"id"});
+        // authorizationDetail.hasOne(product,{ foreignkey:"ProductoId"});
+
+        //authorizationDetail.belongsTo(format,{ foreignkey:"FormatoId"})
         
         module.exports = authorizationDetail;

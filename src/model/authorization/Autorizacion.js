@@ -16,7 +16,8 @@ class authorization extends Model{}
 authorization.init({
     AutorizacionId:{
         type:DataTypes.INTEGER,
-        primaryKey:true
+        primaryKey:true,
+        autoIncrement:true
     },
     DependenciaId:{
         type:DataTypes.INTEGER,
@@ -26,13 +27,13 @@ authorization.init({
         type:DataTypes.INTEGER,
         allowNull:false
     },
-    AutorizacionTipoId:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
+    // AutorizacionTipoId:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:false
+    // },
     FechaFormato:{
         type:DataTypes.DATE,
-        allowNull:true
+        allowNull:false
     },
     NoAutorizado:{
         type:DataTypes.STRING,
@@ -40,7 +41,7 @@ authorization.init({
     },
     AutorizacionOrigenId:{
         type:DataTypes.INTEGER,
-        allowNull:true
+        allowNull:false
     }, 
     MonedaId:{
         type:DataTypes.INTEGER,
@@ -74,10 +75,10 @@ authorization.init({
         type:DataTypes.DATE,
         allowNull:true
     },  
-    AutorizacionEstadoId:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },  
+    // AutorizacionEstadoId:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:false
+    // },  
     NoProforma:{
         type:DataTypes.STRING,
         allowNull:true
@@ -86,10 +87,10 @@ authorization.init({
         type:DataTypes.INTEGER,
         allowNull:true
     },  
-    FechaRegistro:{
-        type:DataTypes.DATE,
-        allowNull:false
-    },  
+    // FechaRegistro:{
+    //     type:DataTypes.DATE,
+    //     allowNull:false
+    // },  
     ObservacionDI:{
         type:DataTypes.STRING,
         allowNull:true
@@ -105,15 +106,15 @@ authorization.init({
     schema:"authorization"
 });
 
-authorization.hasOne(contact,{foreignKey:"ContactoId"});
+authorization.belongsTo(contact,{foreignKey:"ContactoId"});
 
-authorization.hasOne(authOrigin,{foreignKey:"AutorizacionOrigenId"});
-authorization.hasOne(currency,{foreignKey:"MonedaId"});
-authorization.hasOne(authPriority,{foreignKey:"AutorizacionPrioridadId"});
-authorization.hasOne(authEstate,{foreignKey:"AutorizacionEstadoId"});
+authorization.belongsTo(authOrigin,{foreignKey:"AutorizacionOrigenId"});
+authorization.belongsTo(currency,{foreignKey:"MonedaId"});
+authorization.belongsTo(authPriority,{foreignKey:"AutorizacionPrioridadId"});
+authorization.belongsTo(authEstate,{foreignKey:"AutorizacionEstadoId"});
 
-authorization.hasOne(authType,{foreignKey:"AutorizacionTipoId"});
-authorization.hasOne(dependency,{foreignKey:"DependenciaId"});
+authorization.belongsTo(authType,{foreignKey:"AutorizacionTipoId"});
+authorization.belongsTo(dependency,{foreignKey:"DependenciaId"});
 
 authorization.hasMany(detail,{foreignKey:"AutorizacionId"});
 authorization.hasMany(documentoSoport,{foreignKey:"AutorizacionId"});

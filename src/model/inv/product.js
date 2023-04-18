@@ -63,18 +63,18 @@ product.init({
         type:DataTypes.STRING,
         allowNull:true
     },
-    applyFormat:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    }, 
-    applyProcess:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false
-    },  
-    productServiceId:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
+    // applyFormat:{
+    //     type:DataTypes.BOOLEAN,
+    //     allowNull:false
+    // }, 
+    // applyProcess:{
+    //     type:DataTypes.BOOLEAN,
+    //     allowNull:false
+    // },  
+    // productServiceId:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:false
+    // },
     // detail:{
     //     type:DataTypes.STRING,
     //     allowNull:false

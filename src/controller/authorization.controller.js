@@ -11,6 +11,8 @@ const FORMAT = require("../model/authorization/catFormato.js");
 const PRINT = require("../model/authorization/catImpresion.js");
 const PRODUCT = require("../model/inv/product.js");
 const PRINTIMAGEN = require("../model/authorization/catImpresionImagen.js");
+const IVOINCE = require("../model/bill/bill.js");
+
 const sequelize = require("../database.js");
 const url = require('url');
 const { QueryTypes } = require('sequelize');
@@ -318,6 +320,13 @@ const updatePrintImagen = async(req, res) => {
     res.json(authorization);
 }
 
+const getVoinces = async(req, res) => {
+
+    const id = req.params.id;
+    const entities = await IVOINCE.findAll({whare:{AutorizacionId:id}});
+    res.json(entities);
+}
+
 module.exports ={
     createAuthorization,
     createAuthorizationDetail,
@@ -346,5 +355,6 @@ module.exports ={
     filterAuthorizations,
     getAuthorization,
     getAuthorizationDetails,
-    authorizationDetalRemove
+    authorizationDetalRemove,
+    getVoinces
 }

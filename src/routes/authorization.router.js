@@ -9,6 +9,7 @@ router.get("/:id",auth.getAuthorization);
 router.get("/:id/detail",auth.getAuthorizationDetails);
 router.post("/:id/detail",auth.createAuthorizationDetail);
 router.delete("/detail/remove/:id",auth.authorizationDetalRemove);
+router.delete("/:id/invoices",auth.getVoinces);
 
 
 module.exports = router;

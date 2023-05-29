@@ -1,8 +1,6 @@
 
         const {Model, DataTypes} = require("sequelize");
         const sequelize = require("../../database.js");
-        const billState = require("./catFacturaEstado.js");
-        const authorization = require("../authorization/Autorizacion.js");
         const billDetail = require("./billDetail.js");
         
         class bill extends Model{};
@@ -33,19 +31,19 @@
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            EmitidoPor: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
+            // EmitidoPor: {
+            //     type: DataTypes.STRING,
+            //     allowNull: false
+            // },
 
             FechaEmision: {
                 type: DataTypes.DATE,
                 allowNull: false
             },
-            EntregadoPor: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
+            // EntregadoPor: {
+            //     type: DataTypes.STRING,
+            //     allowNull: false
+            // },
             FechaEntrega: {
                 type: DataTypes.DATE,
                 allowNull: true
@@ -55,7 +53,7 @@
                 allowNull: false
             },
             FacturaEstadoId: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             Observaciones: {
@@ -76,8 +74,8 @@
             schema:"authorization"
         });
         
-        bill.hasOne(billState,{ foreignkey:"FacturaEstadoId"});
-        // bill.belongsTo(authorization,{ foreignkey:"AutorizacionId"});
-        // bill.belongsToMany(billDetail,{ foreignkey:"FacturaId"});
+        
+        bill.hasMany(billDetail,{ foreignkey:"FacturaId"});
+        billDetail.belongsTo(bill, { foreignKey: 'FacturaId' });
 
         module.exports = bill;

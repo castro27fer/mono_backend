@@ -45,18 +45,18 @@ router.get("/typeOfInventories/all",inv.getAllTypeOfInventories);
 router.put("/typeOfInventories/:id",inv.typeOfInventoryUpdate);
 router.get("/typeOfInventories/:id",inv.getTypeOfInventory);
 
-router.post("/inputs",[middleware.valida_Open_Inventory,middleware.add_data_inventory],
-    [
-        (req,res,next) => {
-            req.body["movementType"] = "E";
-            next();
-        },
-        inv.movementCreate
-    ]);
+router.post("/inputs",[middleware.valida_Open_Inventory,middleware.add_data_inventory],[inv.movementCreate]);
 
-router.post("/inputs/:id/detail",inv.createMovementDetail);
-// router.get("/inputs",inv.getTypeOfInventories);
-
+router.put("/movements",inv.getMovements)
+router.get("/movements/:id",inv.getMovement);
+router.put("/movements/:id",inv.updateMovement);
+router.delete("/movements/:id",inv.removeMovementDetail);
+router.post("/movements/:id/detail",inv.createMovementDetail);
+router.put("/movements/:id/close",inv.closingMovement);
+// router.post("/movements/prueba",inv.openMasterExists);
+router.post("/movements/preciopromedio",inv.calculatePricePromedio);
+router.get("/years",inv.getYears);
+router.put("/stock",inv.getStock);
 // router.get("/inputs/all",inv.getAllTypeOfInventories);
 // router.put("/inputs/:id",inv.typeOfInventoryUpdate);
 // router.get("/inputs/:id",inv.getTypeOfInventory);

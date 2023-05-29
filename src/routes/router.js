@@ -7,6 +7,7 @@ router.use("/permission",require("./permission.router.js"));
 router.use("/inv",require("./inv.router.js"));
 router.use("/catalog",require("./catalog.router.js"));
 router.use("/authorizations",require("./authorization.router.js"));
+router.use("/invoices",require("./invoinces.router.js"));
 
 module.exports = router;
 

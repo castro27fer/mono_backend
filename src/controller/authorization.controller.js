@@ -11,7 +11,8 @@ const FORMAT = require("../model/authorization/catFormato.js");
 const PRINT = require("../model/authorization/catImpresion.js");
 const PRODUCT = require("../model/inv/product.js");
 const PRINTIMAGEN = require("../model/authorization/catImpresionImagen.js");
-const IVOINCE = require("../model/bill/bill.js");
+const VOINCE = require("../model/bill/bill.js");
+const VOINCE_DETAILS = require("../model/bill/billDetail.js");
 
 const sequelize = require("../database.js");
 const url = require('url');
@@ -323,8 +324,35 @@ const updatePrintImagen = async(req, res) => {
 const getVoinces = async(req, res) => {
 
     const id = req.params.id;
-    const entities = await IVOINCE.findAll({whare:{AutorizacionId:id}});
+    const entities = await VOINCE.findAll({where:{AutorizacionId:id}});
     res.json(entities);
+}
+
+const voinceCreate = async (req, res) => {
+
+
+    const {voice,details} = req.body;
+
+    voice["FacturaEstadoId"] = 1;
+    const oVoice = await VOINCE.create(voice);
+
+    details.forEach(async detail =>{
+        detail["FacturaId"] = oVoice.FacturaId;
+
+        const odetail = await AUTHORIZATIONDETAIL.findByPk(detail.AutorizacionDetalleId);
+        const Current = odetail.Saldo - parseInt(detail.Cantidad);
+        
+        await odetail.update({ Saldo: Current });
+        await odetail.save();
+        
+        let d = detail;
+        d["ProductoId"] = odetail.ProductoId;
+        await oVoice.createBillDetail(detail);
+    });
+
+    const invoice = await VOINCE.findByPk(oVoice.id,{include:[{model:VOINCE_DETAILS}]});
+   res.json(invoice);
+
 }
 
 module.exports ={
@@ -356,5 +384,6 @@ module.exports ={
     getAuthorization,
     getAuthorizationDetails,
     authorizationDetalRemove,
-    getVoinces
+    getVoinces,
+    voinceCreate
 }

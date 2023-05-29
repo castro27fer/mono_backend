@@ -121,6 +121,11 @@ movementMaster.init({
     dateAnnulled:{
         type:DataTypes.DATE,
         allowNull:true
+    },
+    close:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:false
     }
 
 },{

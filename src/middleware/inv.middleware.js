@@ -20,8 +20,10 @@ const valite_opening_inventory = async(req,res,next)=>{
 const valida_Open_Inventory = async(req,res,next) => {
 
     const { warehouseId } = req.body;
+    console.log(warehouseId);
 
     const openInventory = await INVENTORY.findOne({where:[{warehouseId:warehouseId},{closingDate:null}]});
+    console.log(openInventory);
     if(openInventory !=undefined) next();
     else res.status(400).json({"error":["El inventario esta cerrado, debe de aperturar un nuevo inventario para continuar."]});
 }

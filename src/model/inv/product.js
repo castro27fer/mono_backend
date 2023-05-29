@@ -4,14 +4,17 @@ const sequelize = require("../../database.js");
 
 const productType = require("./productType.js");
 const brand = require("./brand.js");
-const format = require("../authorization/catFormato.js");
-const productService = require("./productService.js");
 
 class product extends Model{}
+
 product.init({
     id:{
         type:DataTypes.STRING,
         primaryKey:true
+    },
+    typeOfInventoryId:{
+        type:DataTypes.STRING,
+        allowNull:false
     },
     productTypeId:{
         type:DataTypes.STRING,
@@ -29,17 +32,7 @@ product.init({
     },
     brandId:{
         type:DataTypes.STRING,
-        allowNull:false,
-        validate:{
-            notNull:{
-                args:true,
-                msg:"El campo marca no puede estar vacío."
-            },
-            notEmpty:{
-                args:true,
-                msg:"El campo marca no puede estar vacío."
-            }
-        }
+        allowNull:true
     },
     name:{
         type:DataTypes.STRING,
@@ -63,26 +56,15 @@ product.init({
         type:DataTypes.STRING,
         allowNull:true
     },
-    // applyFormat:{
-    //     type:DataTypes.BOOLEAN,
-    //     allowNull:false
-    // }, 
-    // applyProcess:{
-    //     type:DataTypes.BOOLEAN,
-    //     allowNull:false
-    // },  
-    // productServiceId:{
-    //     type:DataTypes.INTEGER,
-    //     allowNull:false
-    // },
-    // detail:{
-    //     type:DataTypes.STRING,
-    //     allowNull:false
-    // },
     active:{
         type:DataTypes.BOOLEAN,
         allowNull:false,
         defaultValue:true
+    },
+    price:{
+        type:DataTypes.DECIMAL,
+        allowNull:false,
+        defaultValue:0
     }
 
 },{
@@ -98,18 +80,8 @@ product.belongsTo(brand,{
     foreignKey: 'brandId'
 });
 
-// product.belongsTo(productService,{foreignKey: 'productServiceId'});
-
-// product.belongsToMany(format, { through: 'relProducto_Format' });
-
-
-// product.hasOne(brand,{
-//     foreignKey: 'productTypeId'
+// product.belongsTo(billDetail,{
+//     foreignKey: 'ProductoId'
 // });
-
-// product.hasOne(brand,{
-//     foreignKey: 'brandId'
-// });
-
 
 module.exports = product;

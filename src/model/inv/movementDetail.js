@@ -53,7 +53,7 @@ movementDetail.init({
     },
     price:{
         type:DataTypes.DECIMAL,
-        allowNull:false,
+        allowNull:true,
     },
     totalAmount:{
         type:DataTypes.DECIMAL,
@@ -64,6 +64,6 @@ movementDetail.init({
     schema:"inv"
 });
 
-movementDetail.hasOne(product,{ foreignkey:"productId"});
+movementDetail.belongsTo(product,{ foreignkey:"productId", as:"product"});
 
 module.exports = movementDetail;

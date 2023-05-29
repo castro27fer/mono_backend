@@ -246,13 +246,84 @@
     "colId": "7e075510-8948-46c1-be5b-84363f503517",
     "containerId": "",
     "name": "get warehouses",
-    "url": "localhost:3000/api/inv/warehouses",
+    "url": "localhost:3000/api/inv/products",
     "method": "GET",
     "sortNum": 60000,
     "created": "2023-02-07T05:29:44.931Z",
-    "modified": "2023-02-07T05:31:59.518Z",
+    "modified": "2023-05-28T14:47:56.039Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "7b6b078a-7414-4164-82b9-f573f3218c55",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "generar registro existencia",
+    "url": "localhost:3000/api/inv/movements/prueba",
+    "method": "POST",
+    "sortNum": 70000,
+    "created": "2023-05-10T20:44:37.385Z",
+    "modified": "2023-05-10T21:48:09.893Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"year\":2023,\n  \"month\":5,\n  \"warehouseId\":\"AL01\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "db2b4fce-5e6a-4d2b-9121-023f68ec19c6",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "calculando precio promedio",
+    "url": "localhost:3000/api/inv/movements/preciopromedio",
+    "method": "POST",
+    "sortNum": 80000,
+    "created": "2023-05-11T09:41:05.447Z",
+    "modified": "2023-05-11T09:44:58.902Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"productId\":\"INACT\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7e535e27-ea07-4141-b511-face17226ba0",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "getYears",
+    "url": "localhost:3000/api/inv/years",
+    "method": "GET",
+    "sortNum": 90000,
+    "created": "2023-05-11T13:55:25.979Z",
+    "modified": "2023-05-11T13:55:43.308Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "df25003d-652f-4df2-aa64-a487301fadc7",
+    "colId": "7e075510-8948-46c1-be5b-84363f503517",
+    "containerId": "",
+    "name": "getMovements",
+    "url": "localhost:3000/api/inv/movements",
+    "method": "PUT",
+    "sortNum": 110000,
+    "created": "2023-05-11T22:45:31.750Z",
+    "modified": "2023-05-11T23:04:46.287Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"year\":2024,\n  \"month\":3,\n  \"warehouseId\":\"AL01\",\n  \"typeOfInventoryId\":\"IN01\",\n  \"movementType\":\"E\",\n  \"registrationNumber\":\"3242342342\",\n  \"close\":true\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

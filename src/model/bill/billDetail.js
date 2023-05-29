@@ -2,8 +2,8 @@
 const {Model, DataTypes} = require("sequelize");
 const sequelize = require("../../database.js");
 
-const authDetail = require("../authorization/autorizacionDetalle.js");
-const bill = require("./bill.js");
+// const authDetail = require("../authorization/autorizacionDetalle.js");
+const PRODUCT = require("../inv/product.js");
 
 class billDetail extends Model{};
 
@@ -25,6 +25,10 @@ billDetail.init({
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    ProductoId:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     Cantidad: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -37,7 +41,6 @@ billDetail.init({
         type: DataTypes.DECIMAL,
         allowNull: false
     },
-
     Saldo: {
         type: DataTypes.DECIMAL,
         allowNull: false
@@ -48,6 +51,8 @@ billDetail.init({
     schema:"authorization"
 });
 
-// authDetail.belongsTo(bill,{ foreignkey:"AutorizacionDetalleId"});
+
+// billDetail.hasOne(PRODUCT,{ foreignkey:"ProductoId"})
+// billDetail.belongsTo(PRODUCT,{ foreignkey:"ProductoId"});
 
 module.exports = billDetail;

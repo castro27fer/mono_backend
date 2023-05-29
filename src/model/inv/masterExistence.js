@@ -107,11 +107,11 @@ masterExistence.init({
         allowNull:false,
         defaultValue:0
     },
-    unitPrice:{
-        type:DataTypes.DECIMAL,
-        allowNull:false,
-        defaultValue:0
-    }
+    // unitPrice:{
+    //     type:DataTypes.DECIMAL,
+    //     allowNull:false,
+    //     defaultValue:0
+    // }
 },{
     sequelize,
     schema:"inv"
